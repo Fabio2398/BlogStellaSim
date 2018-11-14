@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="page-header">
+        <h1>Blog TuttoDigital : {{ category.name }}</h1>
+    </div>
+
+    {% for post in posts %}
+        <article>
+            <h2><a href="{{ path('post_show', {slug: post.slug}) }}" title="{{ post.name }}">{{ post.name }}</a></h2>
+            <p>
+                <small>Categoria : <a href="{{ path('category_show', {slug: post.category.slug}) }}">{{ post.category.name }}</a>, by John on {{ post.createdAt | date("d M Y") }}</small>
+            </p>
+            <p>
+                {{ post.content | excerpt(60) }}
+            </p>
+            <p class="text-right">
+                <a href="{{ path('post_show', {slug: post.slug}) }}" class="btn btn-primary">Leggi tutto</a>
+            </p>
+        </article>
+    {% endfor %}
+{% endblock %}
